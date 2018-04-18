@@ -5,7 +5,7 @@ include("end_effects.jl")
 """
     Rz(R, λc=250)
 
-Determine roughness of the roughness-profile R. R is truncated to eliminate end-effects. This is equivalent to zero-padding described in [DIN EN ISO 16610-28:2017](references/DIN_EN_ISO_16610-28_2017-04.pdf). Filterwavelength in accordance with [DIN EN ISO 3274:1998](DIN_EN_ISO_3274_1998.pdf) and FMS100-evaluation (Nozzlebody.txt).
+Determine roughness of profile-component `component`. Filterwavelength in accordance with [DIN EN ISO 3274:1998](DIN_EN_ISO_3274_1998.pdf).
 """
 function z(profile::SurfaceProfile, component::Symbol, eliminate_end_effect=zeropad)
     c = eliminate_end_effect(profile, component)
@@ -16,7 +16,7 @@ end
 """
     Wt(W, λc=250)
 
-Determine roughness of the waviness-profile W. W is truncated to eliminate end-effects. This is equivalent to zero-padding described in [DIN EN ISO 16610-28:2017](references/DIN_EN_ISO_16610-28_2017-04.pdf). Filterwavelength in accordance with [DIN EN ISO 3274:1998](DIN_EN_ISO_3274_1998.pdf) and FMS100-evaluation (Nozzlebody.txt).
+Determine waviness of the waviness-profile W. Filterwavelength in accordance with [DIN EN ISO 3274:1998](DIN_EN_ISO_3274_1998.pdf).
 """
 function t(profile::SurfaceProfile, component::Symbol, eliminate_end_effect=zeropad)
     c = eliminate_end_effect(profile, component)

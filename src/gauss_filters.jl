@@ -6,10 +6,10 @@ gauss_highpass(x, λc) = 1-gauss_lowpass(x, λc)
 
 Filter frequencies for roughness-, waviness- and form-components. `rate`(points/mm) is needed to convert `filterwavelengths`(μm) to corresponding filter bins.
 """
-function separatefeatures(data, rate; filterwavelengths=[2.5, 250, 2500])
-    frequencies = dct(data)
-    N = rate/2 # maximal spatial frequency (points/mm)
+function separatefeatures(profile::SurfaceProfile; filterwavelengths=[profile.λs, profile.λc, profile.λf])
+    frequencies = dct(profile.data)
     bins = length(frequencies)
+    N = 1 / profile.resolution / 2 # maximal spatial frequency (points/mm)
     filterbins = 1 ./ (filterwavelengths*1e-3) / (N/bins)
 
     weights(b1, b2) = gauss_highpass.(1:bins, b1) .* gauss_lowpass.(1:bins, b2)
